@@ -11,7 +11,7 @@ public class Interface extends JFrame {
     private JLabel nomeLabel, cpfLabel, imgLabel, confirmacaoLabel;
     private JTextField nomeTextField, cpfTextField, textFieldVazio;
     private JComboBox<String> n1, n2, n3, n4, n5;
-    private JButton surpresinhaButton, limparButton, registrarButton, sorterarButton;
+    private JButton surpresinhaButton, registrarButton, sorterarButton;
     private static String[] valores = { "Selecione o nº de aposta", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
             "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
             "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46",
@@ -37,7 +37,7 @@ public class Interface extends JFrame {
         gbc.fill = GridBagConstraints.VERTICAL;
         aposta.add(imgLabel, gbc);
 
-        nomeLabel = new JLabel("       Nome");
+        nomeLabel = new JLabel("                        Nome");
         nomeLabel.setFont(font);
         gbc.gridx = 11;
         gbc.gridy = 10;
@@ -45,7 +45,7 @@ public class Interface extends JFrame {
         gbc.gridwidth = 1;
         aposta.add(nomeLabel, gbc);
 
-        cpfLabel = new JLabel("          CPF");
+        cpfLabel = new JLabel("                            CPF");
         cpfLabel.setFont(font);
         gbc.gridx = 11;
         gbc.gridy = 11;
@@ -116,26 +116,19 @@ public class Interface extends JFrame {
         gbc.gridwidth = 1;
         aposta.add(surpresinhaButton, gbc);
 
-        limparButton = new JButton("Limpar");
+        registrarButton = new JButton("Registrar Aposta");
         gbc.gridx = 11;
         gbc.gridy = 17;
-        gbc.gridheight = 1;
-        gbc.gridwidth = 1;
-        aposta.add(limparButton, gbc);
-
-        registrarButton = new JButton("Registrar Aposta");
-        gbc.gridx = 10;
-        gbc.gridy = 18;
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         aposta.add(registrarButton, gbc);
 
         sorterarButton = new JButton("Sortear");
-        gbc.gridx = 11;
+        gbc.gridx = 10;
         gbc.gridy = 18;
         gbc.gridheight = 1;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         aposta.add(sorterarButton, gbc);
 
@@ -148,14 +141,9 @@ public class Interface extends JFrame {
         aposta.add(confirmacaoLabel, gbc);
 
         textFieldVazio = new JTextField();
-
-
-
-
+        ////////////////////// PAINEL SORTEIO////////////////////////////////////
         sorteio = new JPanel(new GridBagLayout());
-
-
-        
+        ////////////////////////////////////////////////////////////////////////
         tab.addTab("REGISTRO APOSTA", aposta);
         tab.addTab("SORTEIO", sorteio);
 
@@ -163,11 +151,11 @@ public class Interface extends JFrame {
 
         tde = new TratadorEventos();
         registrarButton.addActionListener(tde);
-        limparButton.addActionListener(tde);
         surpresinhaButton.addActionListener(tde);
+        sorterarButton.addActionListener(tde);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500, 375);
+        this.setSize(550, 375);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(153, 204, 255));
         this.setVisible(true);
@@ -218,7 +206,9 @@ public class Interface extends JFrame {
                         confirmacaoLabel.setText("Aposta registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
                     }
-                } else if (e.getSource() == surpresinhaButton) {
+                }
+
+                if (e.getSource() == surpresinhaButton) {
 
                     nomeString = nomeTextField.getText();
                     cpfString = cpfTextField.getText();
@@ -234,13 +224,19 @@ public class Interface extends JFrame {
                         confirmacaoLabel.setText("CPF deve ser preenchido");
                         confirmacaoLabel.setForeground(Color.RED);
                     } else {
-                        //Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
+                        Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
                         confirmacaoLabel.setText("Aposta surpresa registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
                     }
                 }
-            } else if (controleSorteio == false) {
-                //ToDo
+            } 
+
+            if (e.getSource() == sorterarButton) {
+
+                controleSorteio = false;
+                confirmacaoLabel.setText("Apostas bloqueadas (seguir para aba SORTEIO)");
+                confirmacaoLabel.setForeground(new java.awt.Color(76, 153, 0));
+                
             }
         }
     }

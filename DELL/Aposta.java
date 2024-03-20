@@ -3,11 +3,10 @@ import java.util.Random;
 
 public class Aposta {
 
-    private static String nome, cpf, n1, n2, n3, n4, n5, aposta, codigo;
+    private static String n1, n2, n3, n4, n5, aposta, codigo;
     private static int n1Int, n2Int, n3Int, n4Int, n5Int;
     private static Random random;
     private static String stringVazia = "";
-    private static boolean controle = true;
     private static int codigoInt = 1000;
     public static ArrayList<String> registros = new ArrayList<String>();
 
@@ -51,11 +50,13 @@ public class Aposta {
         return aposta;
     }
 
-    // public static void registrarApostaSurpresa(String nome, String cpf, String apostaSurpresa) {
+    public static void registrarApostaSurpresa(String nome, String cpf, String apostaSurpresa) {
 
-    //     codigo = codigoInt + stringVazia;
-    //     String[] registro = { nome, cpf, apostaSurpresa, codigo };
-    //     Writer.Write(registro);
-    //     codigoInt++;
-    // }
+        codigo = codigoInt + stringVazia;
+        String dados = nome + ", " + cpf + ", " + apostaSurpresa + ", " + codigo;
+        registros.add(dados);
+
+        Writer.Write(registros);
+        codigoInt++;
+    }
 }
