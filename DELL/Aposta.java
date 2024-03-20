@@ -1,5 +1,9 @@
+import java.util.Random;
+
 public class Aposta {
+
     private static String nome, cpf, n1, n2, n3, n4, n5;
+    private static Random random;
 
     public static void setNome(String a) {
         nome = a;
@@ -62,5 +66,12 @@ public class Aposta {
         String aposta = n1+n2+n3+n4+n5;
         String[] registro = {nome, cpf, aposta};
         Writer.Write(registro);
+        
     }
+
+    // public static String[] surpresinha() {
+    //     random = new Random();
+    //     int numeroAleatorio = random.nextInt(50) + 1;
+    //     return
+    //}
 }
