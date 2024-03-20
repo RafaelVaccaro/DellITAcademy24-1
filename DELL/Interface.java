@@ -5,13 +5,13 @@ import java.awt.event.*;
 public class Interface extends JFrame {
 
     private JTabbedPane tab;
-    private JPanel aposta;
+    private JPanel aposta, sorteio;
     private GridBagConstraints gbc = new GridBagConstraints();
     private ImageIcon img;
     private JLabel nomeLabel, cpfLabel, imgLabel, confirmacaoLabel;
     private JTextField nomeTextField, cpfTextField, textFieldVazio;
     private JComboBox<String> n1, n2, n3, n4, n5;
-    private JButton surpresinhaButton, limparButton, registrarButton;
+    private JButton surpresinhaButton, limparButton, registrarButton, sorterarButton;
     private static String[] valores = { "Selecione o nº de aposta", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
             "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
             "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46",
@@ -19,6 +19,7 @@ public class Interface extends JFrame {
     private Font font = new Font("SansSerif", Font.BOLD, 12);
     private static String nomeString, cpfString, n1String, n2String, n3String, n4String, n5String;
     private TratadorEventos tde;
+    private boolean controleSorteio = true;
 
     public Interface() {
         super("Dell");
@@ -126,9 +127,17 @@ public class Interface extends JFrame {
         gbc.gridx = 10;
         gbc.gridy = 18;
         gbc.gridheight = 1;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         aposta.add(registrarButton, gbc);
+
+        sorterarButton = new JButton("Sortear");
+        gbc.gridx = 11;
+        gbc.gridy = 18;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        aposta.add(sorterarButton, gbc);
 
         confirmacaoLabel = new JLabel("", SwingConstants.CENTER);
         gbc.gridx = 10;
@@ -140,7 +149,15 @@ public class Interface extends JFrame {
 
         textFieldVazio = new JTextField();
 
-        tab.addTab("Aposta", aposta);
+
+
+
+        sorteio = new JPanel(new GridBagLayout());
+
+
+        
+        tab.addTab("REGISTRO APOSTA", aposta);
+        tab.addTab("SORTEIO", sorteio);
 
         add(tab);
 
@@ -150,9 +167,9 @@ public class Interface extends JFrame {
         surpresinhaButton.addActionListener(tde);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(475, 350);
+        this.setSize(500, 375);
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(new java.awt.Color(51, 153, 255));
+        this.getContentPane().setBackground(new java.awt.Color(153, 204, 255));
         this.setVisible(true);
 
     }
@@ -160,61 +177,70 @@ public class Interface extends JFrame {
     private class TratadorEventos implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == registrarButton) {
 
-                nomeString = nomeTextField.getText();
-                cpfString = cpfTextField.getText();
-                n1String = n1.getSelectedItem().toString();
-                n2String = n2.getSelectedItem().toString();
-                n3String = n3.getSelectedItem().toString();
-                n4String = n4.getSelectedItem().toString();
-                n5String = n5.getSelectedItem().toString();
+            if (controleSorteio == true) {
 
-                if (n1String.equals("Selecione o nº de aposta") || n2String.equals("Selecione o nº de    aposta")
-                        || n3String.equals("Selecione o nº de aposta") || n4String.equals("Selecione o nº de aposta")
-                        || n5String.equals("Selecione o nº de aposta")) {
-                    confirmacaoLabel.setText("Selecione todos nº de aposta");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else if (n1String.equals(n2String) || n1String.equals(n3String)
-                        || n1String.equals(n4String) || n1String.equals(n5String)
-                        || n2String.equals(n3String) || n2String.equals(n4String) || n2String.equals(n5String)
-                        || n3String.equals(n4String) || n3String.equals(n5String)
-                        || n4String.equals(n5String)) {
-                    confirmacaoLabel.setText("Valores repetidos são inválidos");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else if (nomeTextField.getText().equals(textFieldVazio.getText()) && cpfTextField.getText().equals(textFieldVazio.getText())) {
-                    confirmacaoLabel.setText("Nome e CPF devem ser preenchidos");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else if (nomeTextField.getText().equals(textFieldVazio.getText())) {
-                    confirmacaoLabel.setText("Nome deve ser preenchido");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else if (cpfTextField.getText().equals(textFieldVazio.getText())) {
-                    confirmacaoLabel.setText("CPF deve ser preenchido");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else {
-                    Aposta.registrarAposta(nomeString, cpfString, n1String, n2String, n3String, n4String, n5String);
-                    confirmacaoLabel.setText("Aposta registrada");
-                    confirmacaoLabel.setForeground(Color.BLUE);
+                if (e.getSource() == registrarButton) {
+
+                    nomeString = nomeTextField.getText();
+                    cpfString = cpfTextField.getText();
+                    n1String = n1.getSelectedItem().toString();
+                    n2String = n2.getSelectedItem().toString();
+                    n3String = n3.getSelectedItem().toString();
+                    n4String = n4.getSelectedItem().toString();
+                    n5String = n5.getSelectedItem().toString();
+
+                    if (n1String.equals("Selecione o nº de aposta") || n2String.equals("Selecione o nº de    aposta")
+                            || n3String.equals("Selecione o nº de aposta")
+                            || n4String.equals("Selecione o nº de aposta")
+                            || n5String.equals("Selecione o nº de aposta")) {
+                        confirmacaoLabel.setText("Selecione todos nº de aposta");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else if (n1String.equals(n2String) || n1String.equals(n3String)
+                            || n1String.equals(n4String) || n1String.equals(n5String)
+                            || n2String.equals(n3String) || n2String.equals(n4String) || n2String.equals(n5String)
+                            || n3String.equals(n4String) || n3String.equals(n5String)
+                            || n4String.equals(n5String)) {
+                        confirmacaoLabel.setText("Valores repetidos são inválidos");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else if (nomeTextField.getText().equals(textFieldVazio.getText())
+                            && cpfTextField.getText().equals(textFieldVazio.getText())) {
+                        confirmacaoLabel.setText("Nome e CPF devem ser preenchidos");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else if (nomeTextField.getText().equals(textFieldVazio.getText())) {
+                        confirmacaoLabel.setText("Nome deve ser preenchido");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else if (cpfTextField.getText().equals(textFieldVazio.getText())) {
+                        confirmacaoLabel.setText("CPF deve ser preenchido");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else {
+                        Aposta.registrarAposta(nomeString, cpfString, n1String, n2String, n3String, n4String, n5String);
+                        confirmacaoLabel.setText("Aposta registrada");
+                        confirmacaoLabel.setForeground(Color.BLUE);
+                    }
+                } else if (e.getSource() == surpresinhaButton) {
+
+                    nomeString = nomeTextField.getText();
+                    cpfString = cpfTextField.getText();
+
+                    if (nomeTextField.getText().equals(textFieldVazio.getText())
+                            && cpfTextField.getText().equals(textFieldVazio.getText())) {
+                        confirmacaoLabel.setText("Nome e CPF devem ser preenchidos");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else if (nomeTextField.getText().equals(textFieldVazio.getText())) {
+                        confirmacaoLabel.setText("Nome deve ser preenchido");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else if (cpfTextField.getText().equals(textFieldVazio.getText())) {
+                        confirmacaoLabel.setText("CPF deve ser preenchido");
+                        confirmacaoLabel.setForeground(Color.RED);
+                    } else {
+                        //Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
+                        confirmacaoLabel.setText("Aposta surpresa registrada");
+                        confirmacaoLabel.setForeground(Color.BLUE);
+                    }
                 }
-            } else if (e.getSource() == surpresinhaButton) {
-
-                nomeString = nomeTextField.getText();
-                cpfString = cpfTextField.getText();
-
-                if (nomeTextField.getText().equals(textFieldVazio.getText()) && cpfTextField.getText().equals(textFieldVazio.getText())) {
-                    confirmacaoLabel.setText("Nome e CPF devem ser preenchidos");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else if (nomeTextField.getText().equals(textFieldVazio.getText())) {
-                    confirmacaoLabel.setText("Nome deve ser preenchido");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else if (cpfTextField.getText().equals(textFieldVazio.getText())) {
-                    confirmacaoLabel.setText("CPF deve ser preenchido");
-                    confirmacaoLabel.setForeground(Color.RED);
-                } else {
-                    Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
-                    confirmacaoLabel.setText("Aposta surpresa registrada");
-                    confirmacaoLabel.setForeground(Color.BLUE);
-                }
+            } else if (controleSorteio == false) {
+                //ToDo
             }
         }
     }
