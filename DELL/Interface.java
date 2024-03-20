@@ -150,8 +150,9 @@ public class Interface extends JFrame {
         surpresinhaButton.addActionListener(tde);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(550, 350);
+        this.setSize(475, 350);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(new java.awt.Color(51, 153, 255));
         this.setVisible(true);
 
     }
@@ -193,6 +194,25 @@ public class Interface extends JFrame {
                 } else {
                     Aposta.registrarAposta(nomeString, cpfString, n1String, n2String, n3String, n4String, n5String);
                     confirmacaoLabel.setText("Aposta registrada");
+                    confirmacaoLabel.setForeground(Color.BLUE);
+                }
+            } else if (e.getSource() == surpresinhaButton) {
+
+                nomeString = nomeTextField.getText();
+                cpfString = cpfTextField.getText();
+
+                if (nomeTextField.getText().equals(textFieldVazio.getText()) && cpfTextField.getText().equals(textFieldVazio.getText())) {
+                    confirmacaoLabel.setText("Nome e CPF devem ser preenchidos");
+                    confirmacaoLabel.setForeground(Color.RED);
+                } else if (nomeTextField.getText().equals(textFieldVazio.getText())) {
+                    confirmacaoLabel.setText("Nome deve ser preenchido");
+                    confirmacaoLabel.setForeground(Color.RED);
+                } else if (cpfTextField.getText().equals(textFieldVazio.getText())) {
+                    confirmacaoLabel.setText("CPF deve ser preenchido");
+                    confirmacaoLabel.setForeground(Color.RED);
+                } else {
+                    Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
+                    confirmacaoLabel.setText("Aposta surpresa registrada");
                     confirmacaoLabel.setForeground(Color.BLUE);
                 }
             }
