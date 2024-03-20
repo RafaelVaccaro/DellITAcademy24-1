@@ -8,6 +8,7 @@ public class Writer {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("registros.csv"))) {
             for (String dados : registros) {
                 writer.write(dados + ", ");
+                
             }
             writer.close();
         } catch (IOException e) {

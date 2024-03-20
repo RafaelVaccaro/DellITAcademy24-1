@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Interface extends JFrame {
     
@@ -14,6 +15,8 @@ public class Interface extends JFrame {
     private static String[] valores = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"};
     private Font font = new Font("SansSerif", Font.BOLD, 12);
     private static String confirmacaoString = "";
+    private static String nomeString, cpfString, n1String, n2String, n3String, n4String, n5String;
+    private TratadorEventos tde;
 
     public Interface() {
         super("Dell");
@@ -31,7 +34,7 @@ public class Interface extends JFrame {
         gbc.fill = GridBagConstraints.VERTICAL;
         aposta.add(imgLabel, gbc);
 
-        nomeLabel = new JLabel("   Nome");
+        nomeLabel = new JLabel("       Nome");
         nomeLabel.setFont(font);
         gbc.gridx = 11;
         gbc.gridy = 10;
@@ -39,7 +42,7 @@ public class Interface extends JFrame {
         gbc.gridwidth = 1;
         aposta.add(nomeLabel, gbc);
 
-        cpfLabel = new JLabel("     CPF");
+        cpfLabel = new JLabel("          CPF");
         cpfLabel.setFont(font);
         gbc.gridx = 11;
         gbc.gridy = 11;
@@ -125,7 +128,7 @@ public class Interface extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         aposta.add(registrarButton, gbc);
 
-        confirmacaoLabel = new JLabel(confirmacaoString);
+        confirmacaoLabel = new JLabel(confirmacaoString, SwingConstants.CENTER);
         gbc.gridx = 10;
         gbc.gridy = 19;
         gbc.gridheight = 1;
@@ -136,10 +139,35 @@ public class Interface extends JFrame {
 
         add(tab);
 
+        tde = new TratadorEventos();
+        registrarButton.addActionListener(tde);
+        limparButton.addActionListener(tde);
+        surpresinhaButton.addActionListener(tde);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(550, 350);
+        this.setSize(500, 350);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
+    }
+
+    private class TratadorEventos implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == registrarButton) {
+                
+                nomeString = nomeTextField.getText();
+                cpfString = cpfTextField.getText();
+                n1String = n1.getSelectedItem().toString();
+                n2String = n2.getSelectedItem().toString();
+                n3String = n3.getSelectedItem().toString();
+                n4String = n4.getSelectedItem().toString();
+                n5String = n5.getSelectedItem().toString();
+        
+                Aposta.registrarAposta(nomeString, cpfString, n1String, n2String, n3String, n4String, n5String);
+
+                
+            }
+        }
     }
 }
