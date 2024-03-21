@@ -4,162 +4,108 @@ public class Tabela {
             c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42,
             c43, c44, c45, c46, c47, c48, c49, c50 = 0;
 
-    public static int c1(String n1, String n2, String n3, String n4, String n5) {
+    public static void valoresTabela(String aposta) {
 
-        switch (n1) {
-            case "1":
-                c1++;
-                break;
-            case "2":
-                c2++;
-                break;
-            case "3":
-                c3++;
-                break;
-            case "4":
-                c4++;
-                break;
-            case "5":
-                c5++;
-                break;
-            case "6":
-                c6++;
-                break;
-            case "7":
-                c7++;
-                break;
-            case "8":
-                c8++;
-                break;
-            case "9":
-                c9++;
-                break;
-            case "10":
-                c10++;
-                break;
-            case "11":
-                c11++;
-                break;
-            case "12":
-                c12++;
-                break;
-            case "13":
-                c13++;
-                break;
-            case "14":
-                c14++;
-                break;
-            case "15":
-                c15++;
-                break;
-            case "16":
-                c16++;
-                break;
-            case "17":
-                c17++;
-                break;
-            case "18":
-                c18++;
-                break;
-            case "19":
-                c19++;
-                break;
-            case "20":
-                c20++;
-                break;
-            case "21":
-                c21++;
-                break;
-            case "22":
-                c22++;
-                break;
-            case "23":
-                c23++;
-                break;
-            case "24":
-                c24++;
-                break;
-            case "25":
-                c25++;
-                break;
-            case "26":
-                c26++;
-                break;
-            case "27":
-                c27++;
-                break;
-            case "28":
-                c28++;
-                break;
-            case "29":
-                c29++;
-                break;
-            case "30":
-                c30++;
-                break;
-            case "31":
-                c31++;
-                break;
-            case "32":
-                c32++;
-                break;
-            case "33":
-                c33++;
-                break;
-            case "34":
-                c34++;
-                break;
-            case "35":
-                c35++;
-                break;
-            case "36":
-                c36++;
-                break;
-            case "37":
-                c37++;
-                break;
-            case "38":
-                c38++;
-                break;
-            case "39":
-                c39++;
-                break;
-            case "40":
-                c40++;
-                break;
-            case "41":
-                c41++;
-                break;
-            case "42":
-                c42++;
-                break;
-            case "43":
-                c43++;
-                break;
-            case "44":
-                c44++;
-                break;
-            case "45":
-                c45++;
-                break;
-            case "46":
-                c46++;
-                break;
-            case "47":
-                c47++;
-                break;
-            case "48":
-                c48++;
-                break;
-            case "49":
-                c49++;
-                break;
-            case "50":
-                c50++;
-                break;
-            default:
+        if (aposta.contains(" 1 "))
+            c1++;
+        if (aposta.contains(" 2 "))
+            c2++;
+        if (aposta.contains(" 3 "))
+            c3++;
+        if (aposta.contains(" 4 "))
+            c4++;
+        if (aposta.contains(" 5 "))
+            c5++;
+        if (aposta.contains(" 6 "))
+            c6++;
+        if (aposta.contains(" 7 "))
+            c7++;
+        if (aposta.contains(" 8 "))
+            c8++;
+        if (aposta.contains(" 9 "))
+            c9++;
+        if (aposta.contains(" 10 "))
+            c10++;
+        if (aposta.contains(" 11 "))
+            c11++;
+        if (aposta.contains(" 12 "))
+            c12++;
+        if (aposta.contains(" 13 "))
+            c13++;
+        if (aposta.contains(" 14 "))
+            c14++;
+        if (aposta.contains(" 15 "))
+            c15++;
+        if (aposta.contains(" 16 "))
+            c16++;
+        if (aposta.contains(" 17 "))
+            c17++;
+        if (aposta.contains(" 18 "))
+            c18++;
+        if (aposta.contains(" 19 "))
+            c19++;
+        if (aposta.contains(" 20 "))
+            c20++;
+        if (aposta.contains(" 21 "))
+            c21++;
+        if (aposta.contains(" 22 "))
+            c22++;
+        if (aposta.contains(" 23 "))
+            c23++;
+        if (aposta.contains(" 24 "))
+            c24++;
+        if (aposta.contains(" 25 "))
+            c25++;
+        if (aposta.contains(" 26 "))
+            c26++;
+        if (aposta.contains(" 27 "))
+            c27++;
+        if (aposta.contains(" 28 "))
+            c28++;
+        if (aposta.contains(" 29 "))
+            c29++;
+        if (aposta.contains(" 30 "))
+            c30++;
+        if (aposta.contains(" 31 "))
+            c31++;
+        if (aposta.contains(" 32 "))
+            c32++;
+        if (aposta.contains(" 33 "))
+            c33++;
+        if (aposta.contains(" 34 "))
+            c34++;
+        if (aposta.contains(" 35 "))
+            c35++;
+        if (aposta.contains(" 36 "))
+            c36++;
+        if (aposta.contains(" 37 "))
+            c37++;
+        if (aposta.contains(" 38 "))
+            c38++;
+        if (aposta.contains(" 39 "))
+            c39++;
+        if (aposta.contains(" 40 "))
+            c40++;
+        if (aposta.contains(" 41 "))
+            c41++;
+        if (aposta.contains(" 42 "))
+            c42++;
+        if (aposta.contains(" 43 "))
+            c43++;
+        if (aposta.contains(" 44 "))
+            c44++;
+        if (aposta.contains(" 45 "))
+            c45++;
+        if (aposta.contains(" 46 "))
+            c46++;
+        if (aposta.contains(" 47 "))
+            c47++;
+        if (aposta.contains(" 48 "))
+            c48++;
+        if (aposta.contains(" 49 "))
+            c49++;
+        if (aposta.contains(" 50 "))
+            c50++;
 
-        }
-        return c1;
     }
 }

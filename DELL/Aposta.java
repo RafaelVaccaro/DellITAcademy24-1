@@ -12,10 +12,11 @@ public class Aposta {
 
     public static void registrarAposta(String nome, String cpf, String n1, String n2, String n3, String n4, String n5) {
 
-        aposta = n1 + " " + n2 + " " + n3 + " " + n4 + " " + n5;
+        aposta = " " + n1 + " " + n2 + " " + n3 + " " + n4 + " " + n5 + " ";
         codigo = codigoInt + stringVazia;
         String dados = nome + ", " + cpf + ", " + aposta + ", " + codigo;
         registros.add(dados);
+        Tabela.valoresTabela(aposta);
 
         Writer.Write(registros);
         codigoInt++;
@@ -55,6 +56,7 @@ public class Aposta {
         codigo = codigoInt + stringVazia;
         String dados = nome + ", " + cpf + ", " + apostaSurpresa + ", " + codigo;
         registros.add(dados);
+        Tabela.valoresTabela(apostaSurpresa);
 
         Writer.Write(registros);
         codigoInt++;

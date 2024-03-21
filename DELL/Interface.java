@@ -213,6 +213,7 @@ public class Interface extends JFrame {
                         confirmacaoLabel.setText("Aposta registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
                         listaLabel.setText(Reader.read());
+                        
                     }
                 }
 
