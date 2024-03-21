@@ -9,6 +9,7 @@ public class Aposta {
     private static String stringVazia = "";
     private static int codigoInt = 1000;
     public static ArrayList<String> registros = new ArrayList<String>();
+    public static ArrayList<String> apostas = new ArrayList<String>();
 
     public static void registrarAposta(String nome, String cpf, String n1, String n2, String n3, String n4, String n5) {
 
@@ -16,6 +17,7 @@ public class Aposta {
         codigo = codigoInt + stringVazia;
         String dados = nome + ", " + cpf + ", " + aposta + ", " + codigo;
         registros.add(dados);
+        apostas.add(aposta);
         Tabela.valoresTabela(aposta);
 
         Writer.Write(registros);
@@ -46,7 +48,7 @@ public class Aposta {
         n4 = n4Int + stringVazia;
         n5 = n5Int + stringVazia;
 
-        String aposta = n1 + " " + n2 + " " + n3 + " "  + n4 + " "  + n5;
+        String aposta = " " + n1 + " " + n2 + " " + n3 + " "  + n4 + " "  + n5 + " ";
 
         return aposta;
     }
@@ -56,6 +58,7 @@ public class Aposta {
         codigo = codigoInt + stringVazia;
         String dados = nome + ", " + cpf + ", " + apostaSurpresa + ", " + codigo;
         registros.add(dados);
+        apostas.add(apostaSurpresa);
         Tabela.valoresTabela(apostaSurpresa);
 
         Writer.Write(registros);

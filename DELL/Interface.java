@@ -10,18 +10,22 @@ public class Interface extends JFrame {
     private GridBagConstraints gbc = new GridBagConstraints();
     private ImageIcon img;
     private JLabel nomeLabel, cpfLabel, imgLabel, confirmacaoLabel;
-    private JTextArea listaLabel;
+    private JTextArea listaTextArea;
     private JTextField nomeTextField, cpfTextField, textFieldVazio;
     private JComboBox<String> n1, n2, n3, n4, n5;
-    private JButton surpresinhaButton, registrarButton, sorterarButton;
+    private JButton surpresinhaButton, registrarButton, sortearButton;
     private static String[] valores = { "Selecione o nº de aposta", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
             "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
             "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46",
             "47", "48", "49", "50" };
     private Font font = new Font("SansSerif", Font.BOLD, 12);
     private static String nomeString, cpfString, n1String, n2String, n3String, n4String, n5String;
+    private static String sorteadosString = "";
+    private static String vencedorasString = "";
     private TratadorEventos tde;
     private boolean controleSorteio = true;
+    private boolean controleSorteio2 = true;
+    private static int rodadas, vencedoras = 0;
 
     public Interface() {
         super("Dell");
@@ -126,13 +130,13 @@ public class Interface extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         aposta.add(registrarButton, gbc);
 
-        sorterarButton = new JButton("Sortear");
+        sortearButton = new JButton("Sortear");
         gbc.gridx = 10;
         gbc.gridy = 18;
         gbc.gridheight = 1;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        aposta.add(sorterarButton, gbc);
+        aposta.add(sortearButton, gbc);
 
         confirmacaoLabel = new JLabel("", SwingConstants.CENTER);
         gbc.gridx = 10;
@@ -143,23 +147,23 @@ public class Interface extends JFrame {
         aposta.add(confirmacaoLabel, gbc);
 
         textFieldVazio = new JTextField();
-        ////////////////////// PAINEL SORTEIO////////////////////////////////////
-        sorteio = new JPanel(new GridBagLayout());
+        //////////////////////////////////////////////////////////
+        listaTextArea = new JTextArea("AGUARDANDO REGISTRO");
+        listaApostas = new JScrollPane(listaTextArea);
         /////////////////////////////////////////////////////////////////////////
-        listaLabel = new JTextArea("AGUARDANDO REGISTRO");
-        listaApostas = new JScrollPane(listaLabel);
+        sorteio = new JPanel(new GridBagLayout());
 
         /////////////////////////////////////////////////////////////////////////
         tab.addTab("REGISTRO APOSTA", aposta);
-        tab.addTab("SORTEIO", sorteio);
         tab.addTab("LISTA APOSTAS", listaApostas);
+        tab.addTab("SORTEIO", sorteio);
 
         add(tab);
 
         tde = new TratadorEventos();
         registrarButton.addActionListener(tde);
         surpresinhaButton.addActionListener(tde);
-        sorterarButton.addActionListener(tde);
+        sortearButton.addActionListener(tde);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(550, 375);
@@ -173,7 +177,7 @@ public class Interface extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (controleSorteio == true) {
+            if (controleSorteio) {
 
                 if (e.getSource() == registrarButton) {
 
@@ -212,8 +216,7 @@ public class Interface extends JFrame {
                         Aposta.registrarAposta(nomeString, cpfString, n1String, n2String, n3String, n4String, n5String);
                         confirmacaoLabel.setText("Aposta registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
-                        listaLabel.setText(Reader.read());
-                        
+                        listaTextArea.setText(Reader.read());
                     }
                 }
 
@@ -236,18 +239,40 @@ public class Interface extends JFrame {
                         Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
                         confirmacaoLabel.setText("Aposta surpresa registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
-                        listaLabel.setText(Reader.read());
+                        listaTextArea.setText(Reader.read());
                     }
                 }
-            } 
+            }
 
-            if (e.getSource() == sorterarButton) {
+            if (e.getSource() == sortearButton) {
 
                 controleSorteio = false;
                 confirmacaoLabel.setText("Apostas bloqueadas (seguir para aba SORTEIO)");
                 confirmacaoLabel.setForeground(new java.awt.Color(76, 153, 0));
-                
+
+                while (controleSorteio2) {
+                    {
+                        String atual = Sorteio.sorteio();
+                        for (String dados : Aposta.apostas) {
+                            if (atual.equals(dados)) {
+                                vencedoras++;
+                                vencedorasString = vencedorasString + " " + dados;
+                                sorteadosString = sorteadosString + " " + dados;
+                                controleSorteio2 = false;
+                            } else {
+                                sorteadosString = sorteadosString + " " + dados;
+                            }
+                            if (rodadas == 24)
+                            controleSorteio2 = false;
+                        }
+                        rodadas++;
+                    }
+                }
+                System.out.println(rodadas);
+                System.out.println(vencedoras);
+                System.out.print(sorteadosString);
             }
+
         }
     }
 }
