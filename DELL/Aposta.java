@@ -19,7 +19,7 @@ public class Aposta {
         registros.add(dados);
         apostas.add(aposta);
         Tabela.valoresTabela(aposta);
-
+        
         Writer.Write(registros);
         codigoInt++;
 
@@ -60,7 +60,7 @@ public class Aposta {
         registros.add(dados);
         apostas.add(apostaSurpresa);
         Tabela.valoresTabela(apostaSurpresa);
-
+        
         Writer.Write(registros);
         codigoInt++;
     }
