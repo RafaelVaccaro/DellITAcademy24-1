@@ -30,7 +30,7 @@ public class Sorteio {
         n4 = n4Int + stringVazia;
         n5 = n5Int + stringVazia;
 
-        String aposta = n1 + n2 + n3 + n4 + n5;
+        String aposta = n1 + " " + n2 + " " + n3 + " " + n4 + " " + n5;
 
         return aposta;
     }

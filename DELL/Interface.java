@@ -6,9 +6,11 @@ public class Interface extends JFrame {
 
     private JTabbedPane tab;
     private JPanel aposta, sorteio;
+    private JScrollPane listaApostas;
     private GridBagConstraints gbc = new GridBagConstraints();
     private ImageIcon img;
     private JLabel nomeLabel, cpfLabel, imgLabel, confirmacaoLabel;
+    private JTextArea listaLabel;
     private JTextField nomeTextField, cpfTextField, textFieldVazio;
     private JComboBox<String> n1, n2, n3, n4, n5;
     private JButton surpresinhaButton, registrarButton, sorterarButton;
@@ -143,9 +145,14 @@ public class Interface extends JFrame {
         textFieldVazio = new JTextField();
         ////////////////////// PAINEL SORTEIO////////////////////////////////////
         sorteio = new JPanel(new GridBagLayout());
-        ////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        listaLabel = new JTextArea("AGUARDANDO REGISTRO");
+        listaApostas = new JScrollPane(listaLabel);
+
+        /////////////////////////////////////////////////////////////////////////
         tab.addTab("REGISTRO APOSTA", aposta);
         tab.addTab("SORTEIO", sorteio);
+        tab.addTab("LISTA APOSTAS", listaApostas);
 
         add(tab);
 
@@ -205,6 +212,7 @@ public class Interface extends JFrame {
                         Aposta.registrarAposta(nomeString, cpfString, n1String, n2String, n3String, n4String, n5String);
                         confirmacaoLabel.setText("Aposta registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
+                        listaLabel.setText(Reader.read());
                     }
                 }
 
@@ -227,6 +235,7 @@ public class Interface extends JFrame {
                         Aposta.registrarApostaSurpresa(nomeString, cpfString, Aposta.surpresinha());
                         confirmacaoLabel.setText("Aposta surpresa registrada");
                         confirmacaoLabel.setForeground(Color.BLUE);
+                        listaLabel.setText(Reader.read());
                     }
                 }
             } 

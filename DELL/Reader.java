@@ -5,21 +5,26 @@ import java.io.IOException;
 public class Reader {
 
     private static String line = "";
+    
 
-    public static void read() {
+    public static String read() {
+        String c = "";
         try (BufferedReader reader = new BufferedReader(new FileReader("registros.csv"))) {
+           
             while ((line = reader.readLine()) != null) {
 
+                
                 String[] row = line.split(",");
 
                 for (String i : row) {
-                    System.out.print(i);
+                    c = c + i + "\n";
                 }
-                System.out.println();
+                c = c + "\n";
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return c;
     }
 }
